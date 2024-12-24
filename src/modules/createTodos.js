@@ -1,5 +1,4 @@
 
-import {todos} from "./storage.js";
 
 export class Todo
 {
@@ -19,7 +18,6 @@ export class Todo
 
 export const createTodos = (values) => {
     
-    const todo = new Todo(...values);
-    todos.push(todo);
-    console.log(todo);
+    return new Todo(...values);
+
 }

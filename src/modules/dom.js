@@ -1,5 +1,9 @@
 
 import {createTodos} from "./createTodos.js"
+import {currentFile} from "./storage.js"
+
+
+
 
 // Gets the values from the input
 export const domInput = (function () {
@@ -21,9 +25,11 @@ export const domInput = (function () {
 
 
 // Renders the input boxes
+
 export const domHandler = (function () {
 
     const container = document.getElementById("container");
+    
     const loadTodo = () => {
         container.innerHTML += `
         
@@ -58,19 +64,26 @@ export const domHandler = (function () {
 
 
     // Set the submit button to create the todo
+
     const setSubmit = () => {
         document.getElementById("submit").addEventListener("click", () => {
-            createTodos(domInput.getValues());
+            
+            currentFile.pushTodo(createTodos(domInput.getValues()));
             container.innerHTML = "";
+
+            renderTodos();
             loadCreateButton();
+            
         })
     }
+
+    // Load the "Add Task" Button
 
     const loadCreateButton = () => {
         const createButton = document.createElement("button");
 
         createButton.id = "create-task";
-        createButton.textContent = "Create Task";
+        createButton.textContent = "Add Task";
 
         createButton.addEventListener("click", loadTodo);
 
@@ -79,10 +92,26 @@ export const domHandler = (function () {
 
 
 
+
+    const renderTodos = () => {
+        
+        container.innerHTML = ``;
+
+        for (let todo of currentFile.getTodos()) {
+
+            const button = document.createElement("button");
+
+            button.classList.add("todo");
+            button.textContent = todo.title;
+        
+            container.appendChild(button);
+        }
+    }
     return {
         loadTodo,
         loadCreateButton
     }
 })();
+
 
 
