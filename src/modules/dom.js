@@ -102,6 +102,8 @@ export const domHandler = (function () {
             const button = document.createElement("button");
 
             button.classList.add("todo");
+
+            button.classList.add(todo.getPriority().toLowerCase());
             button.textContent = todo.title;
         
             container.appendChild(button);
