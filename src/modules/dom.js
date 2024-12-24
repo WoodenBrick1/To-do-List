@@ -1,5 +1,5 @@
 
-import { createTodos } from "./createTodos.js"
+import {createTodos} from "./createTodos.js"
 
 // Gets the values from the input
 export const domInput = (function () {

@@ -1,5 +1,4 @@
 
-import {domInput} from "./dom.js";
 import {todos} from "./storage.js";
 
 export class Todo
