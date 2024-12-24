@@ -1,6 +1,8 @@
 import "./styles.css";
-import {CreateTodo} from "./createTodos.js";
-import {domInput, domHandler} from "./dom.js";
+import {domHandler} from "./modules/dom.js"
 
 
-domHandler.loadTodo();
+window.addEventListener("DOMContentLoaded", () => {
+    domHandler.loadCreateButton();
+
+}) 
