@@ -1,6 +1,21 @@
-body
-{
-    background-color: #071952;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+@font-face {
+    font-family: general;
+    src: url("./fonts/SignikaNegative-Bold.ttf");
+  }
+
+:root {
+    font-size: 16px;
+}
+
+body {
+    background-color: rgb(250, 148, 204);
+    font-family: general;
 }
 
 #inputs {
@@ -9,10 +24,61 @@ body
     top: 50%;
     transform: translate(-50%, -50%);
 
-    width: 400px;
-    height: 400px;
- }
+    width: 350px;
+    height: 500px;
 
- label {
-    color: white;
- }
+    background-color: #e6e4e8;
+    border: 20px double #9689a3;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: space-evenly;
+    align-items: center;
+
+
+}
+
+label {
+    font-size: 2rem;
+}
+
+section {
+
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+
+    gap: 10px;
+}
+
+#submit {
+    width: 50%;
+    height: 10%;
+
+    font-size: 1.5rem;
+
+    background-color: #4b657d;
+    border: 2px solid #2e4152;
+    border-radius: 10px;
+}
+
+#submit:hover {
+    background-color: #2b3b49;
+    border: 2px solid #1a2630;
+}
+
+input {
+    width: 100%;
+    height: calc(100% + 40px);
+
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 20px;
+}
+
+select {
+    width: 100%;
+}
