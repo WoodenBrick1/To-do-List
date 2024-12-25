@@ -1,6 +1,6 @@
 
 import {createTodos} from "./createTodos.js"
-import {currentFile, files, setCurrent} from "./storage.js"
+import {currentFile, files, setCurrent, saveStorage, createFile} from "./storage.js"
 
 
 
@@ -73,7 +73,7 @@ export const domHandler = (function () {
 
             renderTodos();
             loadCreateButton();
-            
+            saveStorage();
         })
     }
 
@@ -178,10 +178,12 @@ export const domHandler = (function () {
 
 
 // Handle The Project files
+
 export const domHandlerProjects = (function () {
 
+    const fileContainer = document.getElementById("file-container");
     const loadProjects = () => {
-        const fileContainer = document.getElementById("file-container");
+        
         console.log(files);
         for (let project of files) {
             
@@ -198,8 +200,17 @@ export const domHandlerProjects = (function () {
             }) 
             fileContainer.appendChild(projectButton);
         }
+
+        loadCreateFileButton();
     }
 
+    const loadCreateFileButton = () => {
+        const create = document.createElement("button");
+        create.classList.add("createFile");
+        create.textContent = "+";
+        fileContainer.appendChild(create);
+
+    }
     return {
         loadProjects
     }
