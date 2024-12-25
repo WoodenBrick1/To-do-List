@@ -102,9 +102,10 @@ export const domHandler = (function () {
             const button = document.createElement("button");
 
             button.classList.add("todo");
-
             button.classList.add(todo.getPriority().toLowerCase());
 
+
+            // Create the button properties
 
             const title = document.createElement("p");
             title.classList.add("title");
@@ -114,13 +115,23 @@ export const domHandler = (function () {
             description.classList.add("description");
             description.textContent = todo.getDescription();
 
+            const descriptionTitle = document.createElement("p");
+            descriptionTitle.classList.add("descriptionTitle");
+            descriptionTitle.textContent = "Description: ";
+            
             const date = document.createElement("p");
             date.classList.add("date");
             date.textContent = todo.getDate();
 
+            const dateTitle = document.createElement("dateTitle");
+            dateTitle.classList.add("dateTitle");
+            dateTitle.textContent = "Due Date:";
+
             button.appendChild(title);
             button.appendChild(description);
             button.appendChild(date);
+            button.appendChild(descriptionTitle);
+            button.appendChild(dateTitle);
 
             button.addEventListener("click", () => {
 
@@ -132,6 +143,8 @@ export const domHandler = (function () {
 
                     description.style.display = "block";
                     date.style.display = "block";
+                    dateTitle.style.display = "block";
+                    descriptionTitle.style.display = "block";
                 } 
                 else {
                     button.style.width = "80%";
@@ -140,6 +153,8 @@ export const domHandler = (function () {
 
                     description.style.display = "none";
                     date.style.display = "none";
+                    dateTitle.style.display = "none";
+                    descriptionTitle.style.display = "none";
 
                     button.classList.remove("extended")
                 }
