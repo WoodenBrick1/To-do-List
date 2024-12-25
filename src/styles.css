@@ -15,6 +15,10 @@
     --side-bar: 10vw;
 }
 
+::-webkit-scrollbar {
+    width: 0%;
+}
+
 body {
     font-family: general;
 }
@@ -78,24 +82,24 @@ input {
     font-size: 1.2rem;
     border: none;
     border-radius: 20px;
+
+    padding: 2px 7px;
 }
 
 select {
     width: 100%;
 }
 
-#file-container {
-    height: 100vh;
-    width: var(--side-bar);
 
-    background-color: #d46b86;
-
-    z-index: 1;
-}
 
 #container {
 
     position: fixed;
+
+    overflow-y:scroll;
+    overflow-x:hidden;
+    scrollbar-color: rebeccapurple green;
+
     width: calc(100vw - var(--side-bar));
     height: 100vh;
 
@@ -109,12 +113,21 @@ select {
     grid-gap: 30px;
 
     padding: 50px;
+
+
+    border: 20px solid #d46b86;
 }
 
 #create-task {
 
     width: 40%;
     height: 30%;
+
+    background-color: #682a39;
+    color: rgb(223, 201, 213);
+
+    font-size: 1.7rem;
+
 }
 
 .todo {
@@ -122,16 +135,68 @@ select {
     height: 80%;
 
     font-size: 3rem;
+
+    background-color:#e8e8e9;
+    color: rgb(43, 17, 43);
+
+    transition: all 0.1s;
 }
 
+.extended {
+    display: grid;
+
+    font-size: 1rem;
+}
+
+.description {
+    display: none;
+
+}
+
+.date {
+    display: none;
+}
 .high {
-    background-color: rgba(255, 0, 76, 50%);
+    border: 7px solid rgba(255, 0, 76, 50%);
 }
 
 .medium {
-    background-color: rgba(240, 243, 72, 50%);
+    border: 7px solid rgba(240, 243, 72, 50%);
 }
 
 .low {
-    background-color: rgba(0, 255, 55, 50%);
+    border: 7px solid rgba(0, 255, 55, 50%);
+}
+
+
+
+#file-container {
+
+    position: fixed;
+    
+    height: 100vh;
+    width: var(--side-bar);
+
+    background-color: #d46b86;
+
+    z-index: 1;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 10px;
+    padding: 5px;
+}
+
+#projects-title {
+    font-size: 1.8rem;
+}
+.project {
+    background-color: #e0899f;
+    color: white;
+    height: 30px;
+
+    text-align: right;
+
+    padding-right: 10px;
 }

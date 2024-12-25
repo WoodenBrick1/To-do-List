@@ -13,7 +13,7 @@ export class Todo
 
     getTitle = () => this.title;
     getDescription = () => this.description;
-    getDate = () => this.date;
+    getDate = () => this.dueDate;
     getPriority = () => this.priority;
 }
 

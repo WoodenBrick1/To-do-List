@@ -104,7 +104,47 @@ export const domHandler = (function () {
             button.classList.add("todo");
 
             button.classList.add(todo.getPriority().toLowerCase());
-            button.textContent = todo.title;
+
+
+            const title = document.createElement("p");
+            title.classList.add("title");
+            title.textContent = todo.getTitle();
+
+            const description = document.createElement("p");
+            description.classList.add("description");
+            description.textContent = todo.getDescription();
+
+            const date = document.createElement("p");
+            date.classList.add("date");
+            date.textContent = todo.getDate();
+
+            button.appendChild(title);
+            button.appendChild(description);
+            button.appendChild(date);
+
+            button.addEventListener("click", () => {
+
+                if (button.style.height != "100%") {
+                    button.style.width = "90%";
+                    button.style.height = "100%";
+
+                    button.classList.add("extended")
+
+                    description.style.display = "block";
+                    date.style.display = "block";
+                } 
+                else {
+                    button.style.width = "80%";
+                    button.style.height = "80%";
+
+
+                    description.style.display = "none";
+                    date.style.display = "none";
+
+                    button.classList.remove("extended")
+                }
+                
+            })
         
             container.appendChild(button);
         }
