@@ -1,6 +1,6 @@
 
 import {createTodos} from "./createTodos.js"
-import {currentFile} from "./storage.js"
+import {currentFile, files, setCurrent} from "./storage.js"
 
 
 
@@ -109,11 +109,44 @@ export const domHandler = (function () {
             container.appendChild(button);
         }
     }
+
+
+
+    
     return {
         loadTodo,
-        loadCreateButton
+        loadCreateButton,
+        renderTodos,
     }
 })();
 
 
+
+// Handle The Project files
+export const domHandlerProjects = (function () {
+
+    const loadProjects = () => {
+        const fileContainer = document.getElementById("file-container");
+        console.log(files);
+        for (let project of files) {
+            
+            
+            const projectButton = document.createElement("button");
+            projectButton.classList.add("project");
+
+            projectButton.textContent = project.getName();
+
+            projectButton.addEventListener("click", () => {
+                setCurrent(project);
+                domHandler.renderTodos();
+                domHandler.loadCreateButton();
+            }) 
+            fileContainer.appendChild(projectButton);
+        }
+    }
+
+    return {
+        loadProjects
+    }
+})();
 

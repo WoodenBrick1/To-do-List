@@ -20,11 +20,18 @@ class File {
 }
 
 export function createFile (name) {
-    files.push(new File(name));
+    const file = new File(name);
+    files.push(file);
+    return file;
 }
 
 export function createDefault () {
-    const defaultF = new File("default");
 
-    currentFile = defaultF;
+    setCurrent(createFile("default"))
+
+    createFile("Test");
+}
+
+export const setCurrent = (file) => {
+    currentFile = file;
 }

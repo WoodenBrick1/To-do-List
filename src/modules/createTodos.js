@@ -1,3 +1,4 @@
+import { currentFile } from "./storage";
 
 
 export class Todo
@@ -21,3 +22,4 @@ export const createTodos = (values) => {
     return new Todo(...values);
 
 }
+
