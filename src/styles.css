@@ -13,6 +13,8 @@
     font-size: 16px;
 
     --side-bar: 10vw;
+
+    --botton-color: #682a39;
 }
 
 ::-webkit-scrollbar {
@@ -123,7 +125,7 @@ select {
     width: 40%;
     height: 30%;
 
-    background-color: #682a39;
+    background-color: var(--botton-color);
     color: rgb(223, 201, 213);
 
     font-size: 1.7rem;
@@ -216,16 +218,24 @@ select {
 
     z-index: 1;
 
-    display: flex;
-    flex-direction: column;
-
+    
     gap: 10px;
     padding: 5px;
 }
+#projects {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    margin-top: 30px;
+    margin-bottom: 10px;
+    gap: 5px;
+}
 
 #projects-title {
-    font-size: 1.8rem;
+    font-size: 2.5rem;
 }
+
 .project {
     background-color: #e0899f;
     color: white;
@@ -234,4 +244,36 @@ select {
     text-align: right;
 
     padding-right: 10px;
+
+    border: 2px solid #6b444e;
+
+    font-size: 1.1rem;
 }
+
+.project:hover {
+    background-color: #aa6778;
+    color: white;
+    border: 2px solid #4d3138;
+}
+
+#create-file {
+    border-radius: 50%;
+
+    height: 30px;
+    width: 30px;
+    
+    margin-left: 50%;
+    transform: translate(-50%);
+
+    background-color: #682a39;
+    color: rgb(134, 185, 52);
+    border: none;
+
+    font-size: 1.3rem;
+}
+
+#create-file:hover {
+    background-color: #36682a;
+    color: rgb(255, 255, 254);
+}
+

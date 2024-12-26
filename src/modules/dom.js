@@ -183,8 +183,11 @@ export const domHandlerProjects = (function () {
 
     const fileContainer = document.getElementById("file-container");
     const loadProjects = () => {
+        fileContainer.innerHTML = `<p id="projects-title">Projects</p>`;
         
-        console.log(files);
+
+        const projects = document.createElement("div");
+        projects.id = "projects";
         for (let project of files) {
             
             
@@ -198,21 +201,33 @@ export const domHandlerProjects = (function () {
                 domHandler.renderTodos();
                 domHandler.loadCreateButton();
             }) 
-            fileContainer.appendChild(projectButton);
-        }
 
+          
+            projects.appendChild(projectButton);
+           
+            
+        }
+        fileContainer.appendChild(projects);
         loadCreateFileButton();
+
     }
 
     const loadCreateFileButton = () => {
         const create = document.createElement("button");
-        create.classList.add("createFile");
+        create.id = "create-file";
         create.textContent = "+";
+
+        create.addEventListener("click", () => {
+            createFile("TEST");
+            loadProjects();
+            saveStorage();
+        }) 
         fileContainer.appendChild(create);
 
     }
     return {
-        loadProjects
+        loadProjects,
+        loadCreateFileButton
     }
 })();
 
