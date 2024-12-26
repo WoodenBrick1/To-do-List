@@ -193,14 +193,14 @@ export const domHandler = (function () {
 export const domHandlerProjects = (function () {
 
     const fileContainer = document.getElementById("file-container");
+    const projects = document.getElementById("projects");
     const loadProjects = () => {
 
-        // Add the project-title NEEDS REWORK SO THAT ONLY THE PROJECTS DIV GETS RELOADED
-        fileContainer.innerHTML = `<p id="projects-title">Projects</p>`;
-        
 
-        const projects = document.createElement("div");
-        projects.id = "projects";
+
+        projects.innerHTML = "";
+
+    
         for (let project of storage.files) {
             
             
@@ -240,7 +240,6 @@ export const domHandlerProjects = (function () {
            
             
         }
-        fileContainer.appendChild(projects);
         loadCreateFileButton();
 
     }
@@ -251,11 +250,17 @@ export const domHandlerProjects = (function () {
         create.textContent = "+";
 
         create.addEventListener("click", () => {
+
+            create.style.display = "none";
             storage.createFile("TEST");
             loadProjects();
             storage.saveStorage();
         }) 
         fileContainer.appendChild(create);
+
+    }
+
+    const loadCreateInput = () => {
 
     }
 
@@ -270,15 +275,11 @@ export const domHandlerProjects = (function () {
 
 
                     
-            
+        // still ugly
         if (storage.currentFile != deleted) {
             return storage.currentFile;
-        } else if (previous) {
-            return previous;
-        } else if (after) {
-            return after;
         } else {
-            return storage.files[0];
+            return previous || after || storage.files[0];
         }
     }
     return {
