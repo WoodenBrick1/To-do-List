@@ -1,6 +1,6 @@
 
 import {createTodos} from "./createTodos.js"
-import {currentFile, files, setCurrent, saveStorage, createFile} from "./storage.js"
+import * as storage from "./storage.js"
 
 
 
@@ -68,18 +68,23 @@ export const domHandler = (function () {
     const setSubmit = () => {
         document.getElementById("submit").addEventListener("click", () => {
             
-            currentFile.pushTodo(createTodos(domInput.getValues()));
+            storage.currentFile.pushTodo(createTodos(domInput.getValues()));
             container.innerHTML = "";
 
             renderTodos();
             loadCreateButton();
-            saveStorage();
+            storage.saveStorage();
         })
     }
 
     // Load the "Add Task" Button
 
     const loadCreateButton = () => {
+
+        if (document.getElementById("create-task")) {
+            return;
+        }
+
         const createButton = document.createElement("button");
 
         createButton.id = "create-task";
@@ -94,10 +99,16 @@ export const domHandler = (function () {
 
 
     const renderTodos = () => {
+
+        // Was this deleted? 
+
+        if (!(storage.files.includes(storage.currentFile))) {
+            return;
+        }
         
         container.innerHTML = ``;
 
-        for (let todo of currentFile.getTodos()) {
+        for (let todo of storage.currentFile.getTodos()) {
 
             const button = document.createElement("button");
 
@@ -183,26 +194,48 @@ export const domHandlerProjects = (function () {
 
     const fileContainer = document.getElementById("file-container");
     const loadProjects = () => {
+
+        // Add the project-title NEEDS REWORK SO THAT ONLY THE PROJECTS DIV GETS RELOADED
         fileContainer.innerHTML = `<p id="projects-title">Projects</p>`;
         
 
         const projects = document.createElement("div");
         projects.id = "projects";
-        for (let project of files) {
+        for (let project of storage.files) {
             
             
             const projectButton = document.createElement("button");
             projectButton.classList.add("project");
 
-            projectButton.textContent = project.getName();
+            const projectName = document.createElement("p");
+            projectName.textContent = project.getName();
+          
+            const deleteButton = document.createElement("button");
+            deleteButton.classList.add("deleteFile");
+            deleteButton.textContent = "-";
 
             projectButton.addEventListener("click", () => {
-                setCurrent(project);
+                storage.setCurrent(project);
                 domHandler.renderTodos();
                 domHandler.loadCreateButton();
             }) 
+            
+            deleteButton.addEventListener("click", () => {
+
+                storage.setCurrent(renderAfterDelete(project));
+
+                storage.deleteFile(project);
+                storage.saveStorage();
+                
+                
+
+                loadProjects();
+                domHandler.renderTodos();
+            })
 
           
+            projectButton.appendChild(deleteButton);
+            projectButton.appendChild(projectName);
             projects.appendChild(projectButton);
            
             
@@ -218,12 +251,35 @@ export const domHandlerProjects = (function () {
         create.textContent = "+";
 
         create.addEventListener("click", () => {
-            createFile("TEST");
+            storage.createFile("TEST");
             loadProjects();
-            saveStorage();
+            storage.saveStorage();
         }) 
         fileContainer.appendChild(create);
 
+    }
+
+
+
+    const renderAfterDelete = (deleted) => {
+
+        const previous = storage.files[
+            storage.files.indexOf(deleted) - 1];
+        const after = storage.files[
+            storage.files.indexOf(deleted) + 1];
+
+
+                    
+            
+        if (storage.currentFile != deleted) {
+            return storage.currentFile;
+        } else if (previous) {
+            return previous;
+        } else if (after) {
+            return after;
+        } else {
+            return storage.files[0];
+        }
     }
     return {
         loadProjects,

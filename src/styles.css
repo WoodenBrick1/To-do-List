@@ -248,8 +248,33 @@ select {
     border: 2px solid #6b444e;
 
     font-size: 1.1rem;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+
 }
 
+.deleteFile {
+    border-radius: 50%;
+    
+    height: 20px;
+    width: 20px;
+    font-size: 1.2rem;
+    margin-left: 4px;
+
+    background-color: #db869b;
+    border: none;
+    color: rgb(143, 20, 36);
+
+   
+}
+
+.deleteFile:hover {
+    background-color: #bb2248;
+    color: rgb(247, 247, 247);
+}
 .project:hover {
     background-color: #aa6778;
     color: white;

@@ -62,3 +62,8 @@ export function loadStorage() {
         setCurrent(files[0]);
     }
 }
+
+export function deleteFile(file) {
+    
+    files.splice(files.indexOf(file), 1);
+}   
