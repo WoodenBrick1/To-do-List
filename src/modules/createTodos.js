@@ -1,4 +1,5 @@
 import { currentFile } from "./storage";
+import {isPast} from "../../node_modules/date-fns";
 
 
 export class Todo
@@ -27,8 +28,10 @@ export const checkInput = (values) => {
     const [title, description, date, property] = values;
 
     console.log(title);
-    
+
     if (!title || !date) {
+        return false;
+    } else if (isPast(date)) {
         return false;
     }
     

@@ -297,7 +297,11 @@ export const domHandlerProjects = (function () {
                 input.remove();
                 domHandler.renderTodos();
                 domHandler.loadCreateButton();
+            } else if (e.key == "Escape") {
+                create.style.display = "block";
+                input.remove()
             }
+            
 
         })
 
