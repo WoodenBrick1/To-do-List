@@ -1,5 +1,5 @@
 
-import {createTodos} from "./createTodos.js"
+import {createTodos, checkInput} from "./createTodos.js"
 import * as storage from "./storage.js"
 
 
@@ -67,6 +67,11 @@ export const domHandler = (function () {
 
     const setSubmit = () => {
         document.getElementById("submit").addEventListener("click", () => {
+
+          
+            if (!checkInput(domInput.getValues())) {
+                return;
+            }
             
             storage.currentFile.pushTodo(createTodos(domInput.getValues()));
             container.innerHTML = "";
@@ -240,30 +245,9 @@ export const domHandlerProjects = (function () {
            
             
         }
-        loadCreateFileButton();
+    
 
     }
-
-    const loadCreateFileButton = () => {
-        const create = document.createElement("button");
-        create.id = "create-file";
-        create.textContent = "+";
-
-        create.addEventListener("click", () => {
-
-            create.style.display = "none";
-            storage.createFile("TEST");
-            loadProjects();
-            storage.saveStorage();
-        }) 
-        fileContainer.appendChild(create);
-
-    }
-
-    const loadCreateInput = () => {
-
-    }
-
 
 
     const renderAfterDelete = (deleted) => {
@@ -282,9 +266,47 @@ export const domHandlerProjects = (function () {
             return previous || after || storage.files[0];
         }
     }
+
+
+
+    // add button 
+
+    const create = document.getElementById("create-file");
+
+    create.addEventListener("click", () => {
+
+            create.style.display = "none";
+            loadCreateInput();
+           
+        }) 
+
+
+            
+    // Load the input box
+    const loadCreateInput = () => {
+
+        const input = document.createElement("input");
+        input.id = "create-input";
+        input.addEventListener("keydown", (e) => {
+            if (e.key == "Enter") {
+                storage.createFile(input.value);
+                loadProjects();
+                storage.saveStorage();
+                
+                create.style.display = "block";
+                input.remove();
+                domHandler.renderTodos();
+                domHandler.loadCreateButton();
+            }
+
+        })
+
+        fileContainer.appendChild(input);
+        input.focus();
+       
+    }
     return {
         loadProjects,
-        loadCreateFileButton
     }
 })();
 

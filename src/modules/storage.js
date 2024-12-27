@@ -22,14 +22,13 @@ class File {
 export function createFile(name) {
     const file = new File(name);
     files.push(file);
+    setCurrent(file);
     return file;
 }
 
 export function createDefault() {
 
     setCurrent(createFile("default"))
-
-    createFile("Test");
 }
 
 export function setCurrent(file) {

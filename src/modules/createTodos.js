@@ -23,3 +23,15 @@ export const createTodos = (values) => {
 
 }
 
+export const checkInput = (values) => {
+    const [title, description, date, property] = values;
+
+    console.log(title);
+    
+    if (!title || !date) {
+        return false;
+    }
+    
+    return true;
+}
+
