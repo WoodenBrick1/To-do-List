@@ -167,11 +167,12 @@ export const domHandler = (function () {
             button.addEventListener("click", () => {
 
                 if (button.style.height != "100%") {
-                    button.style.width = "90%";
+                    button.style.width = "80%";
                     button.style.height = "100%";
 
                     button.classList.add("extended")
 
+                    title.style.display = "none";
                     description.style.display = "block";
                     date.style.display = "block";
                     dateTitle.style.display = "block";
@@ -182,6 +183,7 @@ export const domHandler = (function () {
                     button.style.height = "80%";
 
 
+                    title.style.display = "block";
                     description.style.display = "none";
                     date.style.display = "none";
                     dateTitle.style.display = "none";
