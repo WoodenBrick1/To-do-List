@@ -139,15 +139,30 @@ export const domHandler = (function () {
             date.classList.add("date");
             date.textContent = todo.getDate();
 
-            const dateTitle = document.createElement("dateTitle");
+            const dateTitle = document.createElement("p");
             dateTitle.classList.add("dateTitle");
             dateTitle.textContent = "Due Date:";
+
+
+
+            const deleteTodo = document.createElement("button");
+            deleteTodo.classList.add("deleteTodo");
+            deleteTodo.textContent = "X";
+
+            deleteTodo.addEventListener("click", () => {
+                storage.currentFile.deleteTodo(todo);
+                renderTodos();
+                loadCreateButton();
+                storage.saveStorage();
+            })
 
             button.appendChild(title);
             button.appendChild(description);
             button.appendChild(date);
             button.appendChild(descriptionTitle);
             button.appendChild(dateTitle);
+
+            button.appendChild(deleteTodo);
 
             button.addEventListener("click", () => {
 

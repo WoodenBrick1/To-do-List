@@ -17,6 +17,11 @@ class File {
     pushTodo(todo) {
         this.todos.push(todo);
     }
+
+    deleteTodo(todo) {
+        const index = this.todos.indexOf(todo);
+        this.todos.splice(index, 1);
+    }
 }
 
 export function createFile(name) {
