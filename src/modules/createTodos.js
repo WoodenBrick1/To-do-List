@@ -1,6 +1,5 @@
-import { currentFile } from "./storage";
+import { currentFile, files } from "./storage";
 import {isPast} from "../../node_modules/date-fns";
-
 
 export class Todo
 {
@@ -20,6 +19,7 @@ export class Todo
 
 export const createTodos = (values) => {
     
+
     return new Todo(...values);
 
 }
@@ -38,3 +38,16 @@ export const checkInput = (values) => {
     return true;
 }
 
+
+export const sortTodos = () => {
+    currentFile.getTodos().sort((a, b) => {
+        if (a.getPriority() == "Low" && b.getPriority() == "Medium"
+            || a.getPriority() == "Medium" && b.getPriority() == "High") {
+            return 1;
+        } else if (a.getPriority() == b.getPriority()) {
+            return 0;
+        } else {
+            return -1;
+        }
+    })
+}   

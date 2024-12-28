@@ -141,7 +141,7 @@ select {
     background-color:#cc97c5;
     color: rgb(37, 15, 37);
 
-    transition: all 0.1s;
+    transition: height 0.2s;
 
     position: relative;
 }

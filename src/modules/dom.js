@@ -1,5 +1,5 @@
 
-import {createTodos, checkInput} from "./createTodos.js"
+import {createTodos, checkInput, sortTodos} from "./createTodos.js"
 import * as storage from "./storage.js"
 
 
@@ -76,6 +76,7 @@ export const domHandler = (function () {
             storage.currentFile.pushTodo(createTodos(domInput.getValues()));
             container.innerHTML = "";
 
+            sortTodos();
             renderTodos();
             loadCreateButton();
             storage.saveStorage();
@@ -238,6 +239,7 @@ export const domHandlerProjects = (function () {
 
             projectButton.addEventListener("click", () => {
                 storage.setCurrent(project);
+                sortTodos();
                 domHandler.renderTodos();
                 domHandler.loadCreateButton();
             }) 
